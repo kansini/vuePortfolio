@@ -1,0 +1,28 @@
+//* reset *//
+* {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+img,
+a img {
+  border: none;
+  vertical-align: bottom;
+}
+
+a {
+  background: transparent;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+
+  color: #31c66c;
+
+}
+
+a:active {
+  outline: 0;
+}
