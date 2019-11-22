@@ -12,11 +12,12 @@
                         </div>
                     </div>
                     <div class="baseFilter" v-for="(item,index) in filterData" :key="index">
-                        <div class="baseFilter-header" :class="{opened:current === index}" @click="current = index">
+                        <div class="baseFilter-header" :class="{opened:current === index}"
+                             @click="openFilter(index)">
                             <h1>{{item.title}}</h1>
                             <div class="baseFilter-icon"></div>
                         </div>
-                        <ul class="baseFilter-list" v-show="current === index">
+                        <ul class="baseFilter-list">
                             <li class="filter-list-item" v-for="listItem in item.listData">
                                 {{listItem.name}}
                             </li>
@@ -59,10 +60,15 @@
             return {
                 opened: false,
                 current: -1,
+                currentHeight: 0,
                 filterData: [
                     {
                         title: "Clients",
                         listData: [
+                            {name: "Alexandria doors", path: '/'},
+                            {name: "INCANTO", path: '/'},
+                            {name: "Audi", path: '/'},
+                            {name: "LiteBox", path: '/'},
                             {name: "Alexandria doors", path: '/'},
                             {name: "INCANTO", path: '/'},
                             {name: "Audi", path: '/'},
@@ -89,6 +95,11 @@
                     }]
             }
         },
+        methods: {
+            openFilter(index) {
+                this.current = index
+            }
+        }
     }
 </script>
 
@@ -97,7 +108,7 @@
         display: flex;
         justify-content: space-between;
         width: 100%;
-        padding-right: 64px;
+        //padding-right: 64px;
         box-sizing: border-box;
 
         .portfolio-filter {
@@ -209,17 +220,20 @@
                         .isOpen {
                             opacity: .6;
                             transition: opacity ease .5s;
-                            &:hover{
+
+                            &:hover {
                                 opacity: .75;
                             }
                         }
 
                         .baseFilter-list {
+                            height: 0;
                             font-size: 14px;
                             padding-left: 24px;
                             margin-top: 12px;
                             box-sizing: border-box;
-                            transition: all ease .4s;
+                            transition: height ease .4s;
+                            overflow: scroll;
 
                             .filter-list-item {
                                 padding: 8px 0;
@@ -258,6 +272,11 @@
                             }
                         }
 
+                        .opened + .baseFilter-list {
+                            height: 184px;
+                        }
+
+
                         .active {
                             h1 {
                                 position: relative;
@@ -291,6 +310,8 @@
             border-right: 1px solid #f1f1f1;
             border-bottom: 1px solid #f1f1f1;
             box-sizing: border-box;
+            max-height: 100vh;
+            overflow: scroll;
 
             &::after {
                 display: table;

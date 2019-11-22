@@ -153,11 +153,11 @@ table {
 }
 .slide-enter-active,
 .slide-leave-active {
-  transform-origin: top;
   transition: all ease .4s;
 }
 
 .slide-enter,
 .slide-leave-active {
   opacity: 0;
+  height: 0;
 }
