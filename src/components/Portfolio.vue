@@ -7,7 +7,7 @@
             <div class="portfolio-filter-content">
                 <div class="portfolio-filter-inner">
                     <div class="baseFilter">
-                        <div class="baseFilter-header active" @click="current = -1">
+                        <div class="baseFilter-header active" :class="{isOpen:current > -1}" @click="current = -1">
                             <h1>All cases</h1>
                         </div>
                     </div>
@@ -109,14 +109,16 @@
                 justify-content: space-between;
                 width: 100%;
                 height: 96px;
-                padding: 0 24px;
+                padding: 0 40px;
+                margin-bottom: 80px;
                 box-sizing: border-box;
                 transition: all ease .4s;
-                //background: $gold1;
+
                 .logo {
-                    width: 200px;
-                    height: 28px;
-                    background: url("../assets/img/beyondbit_logo.svg") no-repeat center;
+                    width: 96px;
+                    height: 40px;
+                    background: url("../assets/img/logo.svg") no-repeat center;
+                    background-size: 100% auto;
                 }
             }
 
@@ -164,6 +166,7 @@
                             align-items: center;
                             justify-content: space-between;
                             cursor: pointer;
+                            transition: opacity ease .5s;
 
                             h1 {
                                 font-size: 18px;
@@ -203,8 +206,16 @@
                             }
                         }
 
+                        .isOpen {
+                            opacity: .6;
+                            transition: opacity ease .5s;
+                            &:hover{
+                                opacity: .75;
+                            }
+                        }
+
                         .baseFilter-list {
-                            font-size: 12px;
+                            font-size: 14px;
                             padding-left: 24px;
                             margin-top: 12px;
                             box-sizing: border-box;
@@ -217,6 +228,7 @@
                                 cursor: pointer;
 
                                 &:hover {
+                                    font-weight: 800;
                                     color: rgba(0, 0, 0, 1);
                                 }
                             }
@@ -235,9 +247,9 @@
                                     left: 0;
                                     top: 4px;
                                     transform: rotate(0deg);
-                                    opacity: 0;
+                                    //opacity: 0;
                                     background: #000;
-                                    transition: transform ease .6s, opacity ease .8s;
+                                    transition: transform ease 1.2s, opacity ease .8s;
                                 }
                             }
 
