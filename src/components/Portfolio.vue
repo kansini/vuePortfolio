@@ -1,8 +1,33 @@
 <template>
     <div class="portfolio">
-        <div class="portfolio-filter"></div>
+        <div class="portfolio-filter">
+            <div class="portfolio-filter-header">
+                <div class="logo"></div>
+            </div>
+            <div class="portfolio-filter-content">
+                <div class="portfolio-filter-inner">
+                    <div class="baseFilter">
+                        <div class="baseFilter-header active" @click="current = -1">
+                            <h1>All cases</h1>
+                        </div>
+                    </div>
+                    <div class="baseFilter" v-for="(item,index) in filterData" :key="index">
+                        <div class="baseFilter-header" :class="{opened:current === index}" @click="current = index">
+                            <h1>{{item.title}}</h1>
+                            <div class="baseFilter-icon"></div>
+                        </div>
+                        <ul class="baseFilter-list" v-show="current === index">
+                            <li class="filter-list-item" v-for="listItem in item.listData">
+                                {{listItem.name}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
         <div class="portfolio-list">
-            <router-link to="/" tag="div" class="portfolio-list-item" v-for="(item,index) in portfolio" :key="index">
+            <router-link to="/" tag="div" class="portfolio-list-item" v-for="(item,index) in data" :key="index">
                 <div class="list-item-header">
                     <div class="list-item-type">{{item.type}}</div>
                     <div class="list-item-title">{{item.title}}</div>
@@ -22,94 +47,46 @@
 <script>
     export default {
         name: "Portfolio",
+        props: {
+            data: {
+                type: Array,
+                default: () => {
+                    return []
+                }
+            }
+        },
         data() {
             return {
-                portfolio: [
+                opened: false,
+                current: -1,
+                filterData: [
                     {
-                        type: "Services",
-                        title: "浦东新区大调研工作智能化推进平台",
-                        year: 2017,
-                        tag: "Performance marketing",
-                        bg: "#72C4FE"
+                        title: "Clients",
+                        listData: [
+                            {name: "Alexandria doors", path: '/'},
+                            {name: "INCANTO", path: '/'},
+                            {name: "Audi", path: '/'},
+                            {name: "LiteBox", path: '/'}
+                        ]
                     },
                     {
-                        type: "Online store",
-                        title: "黄浦区社区管理",
-                        year: 2017,
-                        tag: "Performance marketing",
-                        bg: "#86D8FF"
+                        title: "Sphere",
+                        listData: [
+                            {name: "B2B", path: '/'},
+                            {name: "Production", path: '/'},
+                            {name: "Audi", path: '/'},
+                            {name: "Constructing", path: '/'}
+                        ]
                     },
                     {
-                        type: "Services",
-                        title: "Panasonic Eplaza",
-                        year: 2018,
-                        tag: "Performance marketing",
-                        bg: "#8FE1EE"
-                    },
-                    {
-                        type: "Services",
-                        title: "Panasonic Eplaza",
-                        year: 2018,
-                        tag: "Performance marketing",
-                        bg: "#FBDB5C"
-                    },
-                    {
-                        type: "B2B",
-                        title: "Panasonic Eplaza",
-                        year: 2018,
-                        tag: "Performance marketing",
-                        bg: "#FFAFA7"
-                    },
-                    {
-                        type: "B2B",
-                        title: "Panasonic Eplaza",
-                        year: 2019,
-                        tag: "Performance marketing",
-                        bg: "#FF95A1"
-                    },
-                    {
-                        type: "B2B",
-                        title: "Panasonic Eplaza",
-                        year: 2019,
-                        tag: "Performance marketing",
-                        bg: "#EBD6A9"
-                    },
-                    {
-                        type: "Online store",
-                        title: "Panasonic Eplaza",
-                        year: 2019,
-                        tag: "Performance marketing",
-                        bg: "#323B4E"
-                    },
-                    {
-                        type: "Multi Media",
-                        title: "Panasonic Eplaza",
-                        year: 2019,
-                        tag: "Performance marketing",
-                        bg: "#FF9CA6"
-                    },
-                    {
-                        type: "Online store",
-                        title: "Panasonic Eplaza",
-                        year: 2019,
-                        tag: "Performance marketing",
-                        bg: "#EFD7B0"
-                    },
-                    {
-                        type: "Online store",
-                        title: "Panasonic Eplaza",
-                        year: 2019,
-                        tag: "Performance marketing",
-                        bg: "#DCC0AA"
-                    },
-                    {
-                        type: "Online store",
-                        title: "Panasonic Eplaza",
-                        year: 2019,
-                        tag: "Performance marketing",
-                        bg: "#FFA1A1"
-                    }
-                ]
+                        title: "Service",
+                        listData: [
+                            {name: "Web development", path: '/'},
+                            {name: "Design", path: '/'},
+                            {name: "Mobile development", path: '/'},
+
+                        ]
+                    }]
             }
         },
     }
@@ -125,6 +102,175 @@
 
         .portfolio-filter {
             width: calc(100% / 3);
+
+            .portfolio-filter-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+                height: 96px;
+                padding: 0 24px;
+                box-sizing: border-box;
+                transition: all ease .4s;
+                //background: $gold1;
+                .logo {
+                    width: 200px;
+                    height: 28px;
+                    background: url("../assets/img/beyondbit_logo.svg") no-repeat center;
+                }
+            }
+
+            .portfolio-filter-content {
+                width: 100%;
+                padding: 0 40px;
+                box-sizing: border-box;
+
+                .portfolio-filter-inner {
+                    width: 100%;
+                    text-align: left;
+
+                    .baseFilter {
+                        &:not(:first-child) {
+                            margin-top: 56px;
+
+                            &:hover h1:before {
+                                transform: scaleX(1);
+                            }
+
+                            h1 {
+                                position: relative;
+
+                                &::before {
+                                    position: absolute;
+                                    content: '';
+                                    left: 0;
+                                    bottom: 2px;
+                                    width: 100%;
+                                    height: 12px;
+                                    border-radius: 8px;
+                                    background: #eee;
+                                    z-index: -1;
+                                    transform: scaleX(0);
+                                    transform-origin: left center;
+                                    transition: all ease .6s;
+                                }
+
+                            }
+
+                        }
+
+                        .baseFilter-header {
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                            cursor: pointer;
+
+                            h1 {
+                                font-size: 18px;
+                                color: #000;
+                                font-weight: bold;
+                                padding: 0 12px;
+                            }
+
+                            .baseFilter-icon {
+                                position: relative;
+                                width: 12px;
+                                height: 12px;
+
+                                &::before {
+                                    position: absolute;
+                                    content: '';
+                                    width: 100%;
+                                    height: 4px;
+                                    left: 0;
+                                    top: 4px;
+                                    background: #000;
+                                    transition: all ease .6s;
+                                }
+
+                                &::after {
+                                    position: absolute;
+                                    content: '';
+                                    width: 100%;
+                                    height: 4px;
+                                    left: 0;
+                                    top: 4px;
+                                    transform: rotate(90deg);
+                                    background: #000;
+                                    transition: all ease .6s;
+                                }
+
+                            }
+                        }
+
+                        .baseFilter-list {
+                            font-size: 12px;
+                            padding-left: 24px;
+                            margin-top: 12px;
+                            box-sizing: border-box;
+                            transition: all ease .4s;
+
+                            .filter-list-item {
+                                padding: 8px 0;
+                                color: rgba(0, 0, 0, .6);
+                                transition: all ease .6s;
+                                cursor: pointer;
+
+                                &:hover {
+                                    color: rgba(0, 0, 0, 1);
+                                }
+                            }
+
+                        }
+
+                        .opened {
+                            .baseFilter-icon {
+                                position: relative;
+
+                                &::after {
+                                    position: absolute;
+                                    content: '';
+                                    width: 100%;
+                                    height: 4px;
+                                    left: 0;
+                                    top: 4px;
+                                    transform: rotate(0deg);
+                                    opacity: 0;
+                                    background: #000;
+                                    transition: transform ease .6s, opacity ease .8s;
+                                }
+                            }
+
+                            h1:before {
+                                transform: scaleX(1);
+                            }
+                        }
+
+                        .active {
+                            h1 {
+                                position: relative;
+
+                                &::before {
+                                    position: absolute;
+                                    content: '';
+                                    left: 0;
+                                    bottom: 2px;
+                                    width: 100%;
+                                    height: 12px;
+                                    border-radius: 8px;
+                                    background: #fff0bd;
+                                    z-index: -1;
+
+                                }
+
+                            }
+
+
+                        }
+                    }
+                }
+            }
+
         }
 
         .portfolio-list {
@@ -164,7 +310,7 @@
                 &:hover .list-item-year {
                     opacity: 1;
                     transform: translateY(-200px);
-                    //z-index: 999;
+                    text-shadow: 2px 2px 0px rgba(255, 255, 255, .4), 4px 4px 0px rgba(255, 255, 255, .2), 6px 6px 0px rgba(255, 255, 255, .1);
                 }
 
                 &:hover .list-item-footer {
@@ -172,6 +318,8 @@
                 }
 
                 &:hover .list-item-img {
+                    width: 90%;
+                    left: 5%;
                     top: 45%;
                 }
 
@@ -197,14 +345,15 @@
                         padding: 0 56px;
                         box-sizing: border-box;
                         font-size: 20px;
-                        font-weight: bold;
+                        font-family: "Noto Sans S Chinese";
+                        font-weight: 800;
                     }
 
                 }
 
                 .list-item-year {
-                    font: 800 48px "Noto Sans S Chinese";
-                    color: #fff;
+                    font: 800 52px "Noto Sans S Chinese";
+                    color: rgba(255, 255, 255, 1);
                     position: absolute;
                     bottom: 0px;
                     opacity: 0;
@@ -212,8 +361,9 @@
                     width: 100%;
                     text-align: center;
                     z-index: 10;
+                    text-shadow: 0px 0px 0px rgba(255, 255, 255, .4), 0px 0px 0px rgba(255, 255, 255, .2), 0px 0px 0px rgba(255, 255, 255, .1);
                     transform: translateY(0);
-                    transition: transform .6s ease, opacity .4s ease;
+                    transition: transform .6s ease, opacity .4s ease, text-shadow 1.6s ease;
 
                 }
 
