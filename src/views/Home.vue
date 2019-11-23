@@ -1,19 +1,25 @@
 <template>
     <div class="home">
+        <pageLoader v-if="isLoading" :background="bgColor"/>
+        <div class="btn-close" @click="isLoading = !isLoading"></div>
         <portfolio :data="portfolio"/>
     </div>
 </template>
 
 <script>
     import portfolio from "@/components/Portfolio"
+    import pageLoader from '@/components/PageLoader'
 
     export default {
         name: 'home',
         components: {
-            portfolio
+            portfolio,
+            pageLoader
         },
         data() {
             return {
+                isLoading: false,
+                bgColor:"",
                 portfolio: [
                     {
                         type: "Services",
@@ -106,5 +112,43 @@
 </script>
 <style lang="scss" scoped>
     .home {
+        .btn-close {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 64px;
+            height: 64px;
+            cursor: pointer;
+            opacity: .85;
+            transform: scale(.55);
+            transition: all ease .5s;
+            z-index: 9999;
+
+            &:hover {
+                transform: scale(.65) rotate(90deg);
+                opacity: 1;
+            }
+
+            &::before,
+            &::after {
+                position: absolute;
+                left: 16px;
+                top: 31px;
+                content: '';
+                width: 32px;
+                height: 2px;
+                background: #fff;
+            }
+
+            &::before {
+                transform: rotate(45deg);
+            }
+
+            &::after {
+                transform: rotate(-45deg);
+            }
+
+        }
+
     }
 </style>

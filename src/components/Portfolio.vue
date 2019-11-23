@@ -17,18 +17,21 @@
                             <h1>{{item.title}}</h1>
                             <div class="baseFilter-icon"></div>
                         </div>
-                        <ul class="baseFilter-list">
-                            <li class="filter-list-item" v-for="listItem in item.listData">
-                                {{listItem.name}}
-                            </li>
-                        </ul>
+                        <scroll-bar classes="scrollbar" ref="Scrollbar">
+                            <ul class="baseFilter-list">
+                                <li class="filter-list-item" v-for="listItem in item.listData">
+                                    {{listItem.name}}
+                                </li>
+                            </ul>
+                        </scroll-bar>
                     </div>
                 </div>
             </div>
 
         </div>
+
         <div class="portfolio-list">
-            <router-link to="/" tag="div" class="portfolio-list-item" v-for="(item,index) in data" :key="index">
+            <div class="portfolio-list-item" v-for="(item,index) in data" :key="index" @click="view(item.bg)">
                 <div class="list-item-header">
                     <div class="list-item-type">{{item.type}}</div>
                     <div class="list-item-title">{{item.title}}</div>
@@ -40,14 +43,17 @@
                 </div>
                 <div class="list-item-year">{{item.year}}</div>
                 <div class="list-item-footer">{{item.tag}}</div>
-            </router-link>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
+    import scrollBar from 'vue2-scrollbar'
+
     export default {
         name: "Portfolio",
+        components: {scrollBar},
         props: {
             data: {
                 type: Array,
@@ -98,6 +104,14 @@
         methods: {
             openFilter(index) {
                 this.current = index
+            },
+            view(color) {
+                this.$parent.isLoading = true
+                this.$parent.bgColor = color
+                // setTimeout(() => {
+                //     this.$router.push('/works')
+                // }, 1000)
+
             }
         }
     }
@@ -226,8 +240,14 @@
                             }
                         }
 
-                        .baseFilter-list {
+                        .scrollbar {
+                            width: 100%;
                             height: 0;
+                            overflow: hidden;
+                            transition: all ease .6s;
+                        }
+
+                        .baseFilter-list {
                             font-size: 14px;
                             padding-left: 24px;
                             margin-top: 12px;
@@ -254,17 +274,15 @@
                                 position: relative;
 
                                 &::after {
-                                    position: absolute;
-                                    content: '';
-                                    width: 100%;
-                                    height: 4px;
-                                    left: 0;
-                                    top: 4px;
-                                    transform: rotate(0deg);
-                                    //opacity: 0;
-                                    background: #000;
-                                    transition: transform ease 1.2s, opacity ease .8s;
+                                    transform: rotate(180deg);
+                                    transition: transform ease .8s;
                                 }
+
+                                &::before {
+                                    opacity: 0;
+                                    transition: opacity ease .4s;
+                                }
+
                             }
 
                             h1:before {
@@ -272,8 +290,8 @@
                             }
                         }
 
-                        .opened + .baseFilter-list {
-                            height: 184px;
+                        .opened + .scrollbar {
+                            height: 240px;
                         }
 
 
@@ -291,9 +309,7 @@
                                     border-radius: 8px;
                                     background: #fff0bd;
                                     z-index: -1;
-
                                 }
-
                             }
 
 
