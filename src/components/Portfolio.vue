@@ -126,7 +126,8 @@
         box-sizing: border-box;
 
         .portfolio-filter {
-            width: calc(100% / 3);
+            width: calc(100% / 4);
+            //width: calc(100% / 3);
 
             .portfolio-filter-header {
                 display: flex;
@@ -321,8 +322,8 @@
         }
 
         .portfolio-list {
-            //width: 100%;
-            width: calc(100% - calc(100%) / 3);
+            width: 75%;
+           // width: calc(100% - calc(100%) / 3);
             border-right: 1px solid #f1f1f1;
             border-bottom: 1px solid #f1f1f1;
             box-sizing: border-box;
