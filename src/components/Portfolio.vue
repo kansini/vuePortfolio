@@ -27,7 +27,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
 
         <div class="portfolio-list">

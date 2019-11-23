@@ -1,13 +1,25 @@
 <template>
     <div class="page-loader" :style="{background:background}">
-        <div class="loading"></div>
+        <transition name="fadeIn">
+            <div class="loading" v-if="isLoading"></div>
+        </transition>
     </div>
 </template>
 
 <script>
     export default {
         name: "PageLoader",
-        props: ['background']
+        props: ['background'],
+        data() {
+            return {
+                isLoading: false
+            }
+        },
+        mounted() {
+            setTimeout(() => {
+                this.isLoading = true
+            }, 400)
+        }
     }
 </script>
 
@@ -17,8 +29,9 @@
         left: 0;
         top: 0;
         width: 100%;
+        transform-origin: left center;
         height: 100vh;
-        animation: loading linear .3s forwards;
+        animation: loading linear .4s forwards;
         z-index: 9999;
 
         .loading {
@@ -39,7 +52,7 @@
                 height: 24px;
                 border-radius: 80px;
                 box-shadow: 0 0 0 4px #fff;
-                animation: circle 1.2s linear infinite;
+                animation: circle linear 1.2s infinite;
 
             }
         }
@@ -48,6 +61,9 @@
     @keyframes loading {
         0% {
             width: 0;
+        }
+        70% {
+            width: 50%;
         }
         100% {
             width: 100%;

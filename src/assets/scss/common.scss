@@ -46,8 +46,18 @@ table {
   transition: all ease .4s;
 }
 
-.slide-enter,
-.slide-leave-active {
+.fadeIn-enter,
+.fadeIn-leave-active {
   opacity: 0;
   height: 0;
+}
+
+.fadeIn-enter-active,
+.fadeIn-leave-active {
+  transition: all ease .4s;
+}
+
+.fadeIn-enter,
+.fadeIn-leave-active {
+  opacity: 0;
 }
