@@ -1,7 +1,12 @@
 <template>
     <div class="page-loader" :style="{background:background}">
+        <div class="works-nav">
+            <div class="btn-next"></div>
+            <div class="btn-pre"></div>
+        </div>
         <transition name="fadeIn">
-            <div class="loading" v-if="isLoading"></div>
+            <animation path="./ani/loading-book.json" renderer="svg" id="loading" v-show="isLoading"/>
+            <!--            <div class="loading" v-show="isLoading"></div>-->
         </transition>
     </div>
 </template>
@@ -18,7 +23,11 @@
         mounted() {
             setTimeout(() => {
                 this.isLoading = true
-            }, 400)
+            }, 600);
+            // setTimeout(() => {
+            //     this.isLoading = false
+            // }, 4000)
+
         }
     }
 </script>
@@ -31,8 +40,55 @@
         width: 100%;
         transform-origin: left center;
         height: 100vh;
-        animation: loading linear .4s forwards;
+        animation: loading linear .5s forwards;
         z-index: 9999;
+
+        .works-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 24px;
+            border: 2px solid rgba(255, 255, 255, .85);
+            border-radius: 35px;
+            box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, .1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 40px;
+            height: 88px;
+            z-index: 9999;
+
+            [class^="btn-"] {
+                width: 40px;
+                height: 40px;
+                cursor: pointer;
+                opacity: .6;
+                transition: all ease .4s;
+
+                &:hover {
+                    opacity: 1;
+                    transform: scale(1.2);
+                }
+            }
+
+            .btn-next {
+                background: url("../assets/img/ico-next.svg") no-repeat center;
+                background-size: 6px;
+            }
+
+            .btn-pre {
+                background: url("../assets/img/ico-pre.svg") no-repeat center;
+                background-size: 6px;
+            }
+
+
+        }
+
+        #loading {
+            position: absolute;
+            left: calc(50% - 120px);
+            top: calc(50% - 140px);
+        }
 
         .loading {
             position: absolute;
@@ -62,8 +118,8 @@
         0% {
             width: 0;
         }
-        70% {
-            width: 50%;
+        60% {
+            width: 30%;
         }
         100% {
             width: 100%;

@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+import kits from '@/components/kits'
+
+Vue.use(kits)
 
 Vue.config.productionTip = false
 

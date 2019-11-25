@@ -358,7 +358,7 @@
 
                 &:hover .list-item-year {
                     opacity: 1;
-                    transform: translateY(-200px);
+                    bottom:60%;
                     text-shadow: 2px 2px 0px rgba(255, 255, 255, .4), 4px 4px 0px rgba(255, 255, 255, .2), 6px 6px 0px rgba(255, 255, 255, .1);
                 }
 
@@ -412,7 +412,7 @@
                     z-index: 10;
                     text-shadow: 0px 0px 0px rgba(255, 255, 255, .4), 0px 0px 0px rgba(255, 255, 255, .2), 0px 0px 0px rgba(255, 255, 255, .1);
                     transform: translateY(0);
-                    transition: transform .6s ease, opacity .4s ease, text-shadow 1.6s ease;
+                    transition: bottom .6s ease, opacity .4s ease, text-shadow 1.6s ease;
 
                 }
 

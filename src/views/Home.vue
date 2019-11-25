@@ -1,7 +1,7 @@
 <template>
     <div class="home">
-        <pageLoader v-if="isLoading" :background="bgColor"/>
-        <div class="btn-close" @click="isLoading = !isLoading"></div>
+        <pageLoader v-if="isLoading" :background="bgColor" :class="{quit:quit}"/>
+        <div class="btn-close" @click="close()"></div>
         <portfolio :data="portfolio"/>
     </div>
 </template>
@@ -19,7 +19,8 @@
         data() {
             return {
                 isLoading: false,
-                bgColor:"",
+                bgColor: "",
+                quit: false,
                 portfolio: [
                     {
                         type: "Services",
@@ -107,6 +108,15 @@
                     }
                 ]
             }
+        },
+        methods: {
+            close() {
+                this.quit = true
+                setTimeout(() => {
+                    this.isLoading = false
+                    this.quit = false
+                }, 500)
+            }
         }
     }
 </script>
@@ -149,6 +159,28 @@
             }
 
         }
+    }
+
+    .quit {
+        width: 100%;
+        transform-origin: right center;
+        animation: qiut linear .5s forwards;
+    }
+
+    @keyframes qiut {
+        0% {
+            //width: 100%;
+            transform: scaleX(1);
+        }
+        60% {
+            //width: 40%;
+            transform: scaleX(0.7);
+        }
+        100% {
+           //width: 0%;
+            transform: scaleX(0);
+        }
+
 
     }
 </style>

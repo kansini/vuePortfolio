@@ -59,5 +59,6 @@ table {
 
 .fadeIn-enter,
 .fadeIn-leave-active {
+  transform: scale(0);
   opacity: 0;
 }
