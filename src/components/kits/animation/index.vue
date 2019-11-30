@@ -32,14 +32,6 @@
                 default: 'transparent'
             }
 
-
-
-
-        },
-        data() {
-            return {
-                aniPath: "./ani/fingerPrint.json"
-            }
         },
         mounted() {
             this.init()

@@ -1,4 +1,4 @@
-import animation from './animation' //县区项目总数
+import animation from './animation'
 
 
 const components = {
