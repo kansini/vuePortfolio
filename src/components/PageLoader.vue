@@ -4,7 +4,7 @@
             <div class="btn-next"></div>
             <div class="btn-pre"></div>
         </div>
-        <loading v-show="isLoading" type="circle02"/>
+        <loading v-show="isLoading"  background="rgba(0,0,0,1)" :custom-path="path" />
     </div>
 </template>
 
@@ -14,7 +14,8 @@
         props: ['background'],
         data() {
             return {
-                isLoading: false
+                isLoading: false,
+                path:"./ani/skeleton.json"
             }
         },
         mounted() {

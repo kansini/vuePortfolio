@@ -2,10 +2,11 @@
     <transition name="fadeIn">
         <div style="height: 100%">
             <div id="loading">
-                <animation :path="path" id="loading-img"/>
+                <animation :path="path" id="loading-img" v-if="type"/>
+                <animation :path="customPath" id="loading-img" v-else/>
                 <div class="loading-text" v-if="loadingText">{{loadingText}}</div>
             </div>
-            <div class="mask" v-if="mask" :style="{opacity: maskOpacity}"></div>
+            <div class="mask" v-if="background" :style="{background: background}"></div>
         </div>
     </transition>
 </template>
@@ -16,19 +17,23 @@
         props: {
             type: {
                 type: String,
-                default: "book"
+                default: null
+            },
+            customPath: {
+                type: String,
+                default: null
             },
             loadingText: {
                 type: String,
                 default: null
             },
-            mask: {
-                type: Boolean,
-                default: false
-            },
-            maskOpacity: {
-                type: Number,
-                default: .2
+            // mask: {
+            //     type: Boolean,
+            //     default: false
+            // },
+            background: {
+                type: String,
+                default: undefined
             }
         },
         computed: {
