@@ -54,11 +54,40 @@ table {
 
 .fadeIn-enter-active,
 .fadeIn-leave-active {
-  transition: all ease .4s;
+  transition: all ease .6s;
 }
 
 .fadeIn-enter,
 .fadeIn-leave-active {
-  transform: scale(0);
+  //transform: scale(0);
   opacity: 0;
+
 }
+
+/*动画*/
+@keyframes loading {
+  0% {
+    width: 0;
+  }
+  60% {
+    width: 30%;
+  }
+  100% {
+    width: 100%;
+  }
+
+}
+@keyframes circle {
+  0% {
+    transform: scale(0);
+  }
+  80% {
+    transform: scale(3.2);
+  }
+  100% {
+    transform: scale(2);
+  }
+
+
+}
+

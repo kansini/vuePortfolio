@@ -1,8 +1,9 @@
 import animation from './animation'
-
+import loading from './loading'
 
 const components = {
-    animation
+    animation,
+    loading
 }
 
 const install = (Vue, opts = {}) => {

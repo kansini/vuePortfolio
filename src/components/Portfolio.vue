@@ -175,7 +175,7 @@
                                     width: 100%;
                                     height: 12px;
                                     border-radius: 8px;
-                                    background: #eee;
+                                    background: #fff0bd;
                                     z-index: -1;
                                     transform: scaleX(0);
                                     transform-origin: left center;
@@ -232,11 +232,20 @@
                         }
 
                         .isOpen {
-                            opacity: .6;
+                            opacity: .7;
                             transition: opacity ease .5s;
 
                             &:hover {
-                                opacity: .75;
+                                opacity: 1;
+                            }
+                            h1{
+                                &::before{
+                                    transform: scaleX(0);
+                                    transition: all ease .6s;
+                                }
+                                &:hover::before{
+                                    transform: scaleX(1);
+                                }
                             }
                         }
 
@@ -307,6 +316,8 @@
                                     width: 100%;
                                     height: 12px;
                                     border-radius: 8px;
+                                   // transform: scaleX(1);
+                                    transform-origin: left center;
                                     background: #fff0bd;
                                     z-index: -1;
                                 }
